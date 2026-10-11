@@ -1,124 +1,349 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# API Práctica con NestJS
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+Ejercicio para crear una API con **NestJS** que tiene dos secciones: **usuarios** y **productos**. Cada sección responde en dos formatos: JSON (lista cruda) y una página con tarjetas de colores.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+> **Analogía:** NestJS es como armar un restaurante.
+> - **Módulo** = una sección del restaurante.
+> - **Controlador** = el mesero (recibe los pedidos).
+> - **Servicio** = el cocinero (prepara lo que se pide).
 
-## Description
+---
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## Requisitos
 
-## Project setup
+- Node.js instalado
+- Una terminal (por ejemplo, la de VS Code)
+
+---
+
+## Paso 1. Instalar Node.js
+
+Revisa si ya lo tienes:
 
 ```bash
-$ npm install
+node -v
 ```
 
-## Compile and run the project
+### Windows
 
 ```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+winget install OpenJS.NodeJS.LTS
 ```
 
-## Run tests
+Comprueba que quedó instalado:
 
 ```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+node -v
+npm -v
 ```
 
-## Deployment
+### Linux (Ubuntu)
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
-
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+Actualiza la lista de programas disponibles:
 
 ```bash
-$ npm install -g @nestjs/mau
-$ mau deploy
+sudo apt update
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
-
-## Observability
-
-In production applications, observability is essential for understanding how your system behaves, detecting issues early, and maintaining reliable performance.
-
-[NestJS Observe](https://observe.nestjs.com) automatically instruments your NestJS application, giving you deep visibility into your system with minimal setup:
-
-- **Distributed tracing:** Follow requests across services and understand how they flow through your system.
-- **Waterfall analysis:** Visualize request execution and identify slow operations, bottlenecks, and unexpected delays.
-- **Performance analysis:** Analyze application performance in real time and quickly pinpoint areas that need optimization.
-- **Metrics:** Track key application and infrastructure metrics to understand system health and performance trends.
-- **Logging:** Centralize and correlate logs with traces and other telemetry to make debugging easier.
-- **Error tracking:** Detect errors quickly and investigate their root causes with the surrounding context.
-- **SLA monitoring:** Track service-level objectives and identify when your application is approaching or exceeding defined thresholds.
-- **Alarms and alerts:** Set up alerts for critical errors, performance degradation, SLA violations, and other anomalies so your team can react quickly.
-
-To add it to this project:
+Agrega el repositorio oficial de Node.js (el de Ubuntu suele traer una versión vieja):
 
 ```bash
-$ npm install @nestjs/observe
+curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
 ```
 
-Then follow the [setup guide](https://docs.nestjs.com/observability/overview) - it takes a single import and an app key.
+Instala Node.js (npm viene incluido):
 
-The free plan needs no payment details and covers 300,000 events a month. You can also browse the [live demo](https://www.observe-demo.nestjs.com/dashboard) first - the whole dashboard over a busy service's data, with nothing to install.
+```bash
+sudo apt install -y nodejs
+```
 
-## Resources
+Comprueba que quedó instalado:
 
-Check out a few resources that may come in handy when working with NestJS:
+```bash
+node -v
+npm -v
+```
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Auto-instrument your application with [NestJS Observe](https://observe.nestjs.com). Distributed tracing, metrics, and logging made easy. Error tracking and performance monitoring for your NestJS applications.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+---
 
-## Support
+## Paso 2. Crear el proyecto
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+Instala la herramienta de NestJS en la computadora (solo se hace una vez). Es como conseguir las llaves del restaurante:
 
-## Stay in touch
+```bash
+npm i -g @nestjs/cli
+```
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+Crea el proyecto con todo lo básico ya armado. Es como construir el restaurante vacío:
 
-## License
+```bash
+nest new api-practica
+```
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+Entra a la carpeta del proyecto:
+
+```bash
+cd api-practica
+```
+
+Al crear el proyecto, `nest new` hace unas preguntas. Muévete con las flechas del teclado y presiona Enter:
+
+| Pregunta | Qué elegir |
+|---|---|
+| Gestor de paquetes | `npm` |
+| @nestjs/observe | `No` (no hace falta para el ejercicio) |
+| Sistema de módulos | `CJS (CommonJS) with jest` |
+
+> ⚠️ **No** elijas ESM, porque el código de abajo no funciona con esa opción.
+
+---
+
+## Paso 3. Abrir la carpeta en VS Code
+
+1. Arriba a la izquierda: **Open Folder**.
+2. Elige la carpeta `api-practica`.
+3. Abre una terminal nueva.
+
+---
+
+## Paso 4. Crear las piezas de usuarios
+
+En la terminal escribe, una por una:
+
+Crea la sección "usuarios" del restaurante (el módulo):
+
+```bash
+nest g module users
+```
+
+Crea al mesero de esa sección (el controlador), que recibe los pedidos:
+
+```bash
+nest g controller users
+```
+
+Crea al cocinero de esa sección (el servicio), que prepara lo que se pide:
+
+```bash
+nest g service users
+```
+
+En el explorador de la izquierda abre `src > users`. Ahí aparecieron los archivos nuevos.
+
+---
+
+## Paso 5. Código del servicio de usuarios (el cocinero)
+
+Abre `src/users/users.service.ts`, borra todo y pega esto:
+
+```ts
+import { Injectable } from '@nestjs/common';
+
+@Injectable()
+export class UsersService {
+  private users = [
+    { id: 1, nombre: 'Usuario de prueba', correo: 'prueba@mail.com' },
+  ];
+
+  findAll() {
+    return this.users;
+  }
+}
+```
+
+---
+
+## Paso 6. Código del controlador de usuarios (el mesero)
+
+Abre `src/users/users.controller.ts`, borra todo y pega esto:
+
+```ts
+import { Controller, Get } from '@nestjs/common';
+import { UsersService } from './users.service';
+
+@Controller('users')
+export class UsersController {
+  constructor(private readonly usersService: UsersService) {}
+
+  // Ruta 1: /users  -> entrega la lista tal cual (formato JSON)
+  @Get()
+  findAll() {
+    return this.usersService.findAll();
+  }
+
+  // Ruta 2: /users/bonito  -> entrega la lista en tarjetas de colores
+  @Get('bonito')
+  verBonito() {
+    const tarjetas = this.usersService
+      .findAll()
+      .map(
+        (u) => `
+        <div class="tarjeta">
+          <h2>${u.nombre}</h2>
+          <p>${u.correo}</p>
+        </div>`,
+      )
+      .join('');
+
+    return `
+      <meta charset="utf-8">
+      <style>
+        body { font-family: Arial; background: #1a1b26; color: white; padding: 40px; }
+        h1 { color: #ff5c82; }
+        .tarjeta { background: #252738; padding: 20px; border-radius: 12px; margin-bottom: 16px; }
+        .tarjeta h2 { margin: 0 0 8px; }
+        .tarjeta p { margin: 0; color: #a9adc1; }
+      </style>
+      <h1>Lista de usuarios</h1>
+      ${tarjetas}
+    `;
+  }
+}
+```
+
+Guarda los dos archivos con `Ctrl + S`.
+
+---
+
+## Paso 7. Encender el servidor
+
+```bash
+npm run start:dev
+```
+
+Espera a que diga `Nest application successfully started`.
+
+---
+
+## Paso 8. Ver el resultado
+
+Abre estas dos direcciones en el navegador:
+
+- http://localhost:3000/users/bonito → el usuario de prueba en una tarjeta de colores.
+- http://localhost:3000/users → la misma información como lista cruda (JSON).
+
+---
+
+## Paso 9. Repetir con productos
+
+Abre una **segunda terminal** y escribe:
+
+Crea la sección "productos" del restaurante (otro módulo, separado del de usuarios):
+
+```bash
+nest g module products
+```
+
+Crea al mesero de productos (el controlador):
+
+```bash
+nest g controller products
+```
+
+Crea al cocinero de productos (el servicio):
+
+```bash
+nest g service products
+```
+
+Abre `src/products/products.service.ts`:
+
+```ts
+import { Injectable } from '@nestjs/common';
+
+@Injectable()
+export class ProductsService {
+  private products = [
+    { id: 1, nombre: 'Producto de prueba', precio: 100 },
+  ];
+
+  findAll() {
+    return this.products;
+  }
+}
+```
+
+Luego abre `src/products/products.controller.ts`:
+
+```ts
+import { Controller, Get } from '@nestjs/common';
+import { ProductsService } from './products.service';
+
+@Controller('products')
+export class ProductsController {
+  constructor(private readonly productsService: ProductsService) {}
+
+  // Ruta 1: /products  -> entrega la lista tal cual (formato JSON)
+  @Get()
+  findAll() {
+    return this.productsService.findAll();
+  }
+
+  // Ruta 2: /products/bonito  -> entrega la lista en tarjetas de colores
+  @Get('bonito')
+  verBonito() {
+    const tarjetas = this.productsService
+      .findAll()
+      .map(
+        (p) => `
+        <div class="tarjeta">
+          <h2>${p.nombre}</h2>
+          <p>Q${p.precio}</p>
+        </div>`,
+      )
+      .join('');
+
+    return `
+      <meta charset="utf-8">
+      <style>
+        body { font-family: Arial; background: #1a1b26; color: white; padding: 40px; }
+        h1 { color: #4fd1c5; }
+        .tarjeta { background: #252738; padding: 20px; border-radius: 12px; margin-bottom: 16px; }
+        .tarjeta h2 { margin: 0 0 8px; }
+        .tarjeta p { margin: 0; color: #a9adc1; }
+      </style>
+      <h1>Lista de productos</h1>
+      ${tarjetas}
+    `;
+  }
+}
+```
+
+Direcciones para probar:
+
+- http://localhost:3000/products/bonito
+- http://localhost:3000/products
+
+---
+
+## Paso 10. Reto: agregar más usuarios y productos
+
+En `users.service.ts`, agrega **10 usuarios nuevos** dentro de la lista, después del de prueba. Cada línea termina con coma. Ejemplo:
+
+```ts
+{ id: 2, nombre: 'Nombre', correo: 'nombre@mail.com' },
+{ id: 3, nombre: 'Nombre', correo: 'otronombre@mail.com' },
+```
+
+En `products.service.ts`, agrega tus propios productos:
+
+```ts
+{ id: 2, nombre: 'Mouse', precio: 120 },
+{ id: 3, nombre: 'Teclado', precio: 250 },
+```
+
+Guarda con `Ctrl + S` y recarga el navegador. Las tarjetas nuevas aparecen solas.
+
+**Para personalizar:** en el controlador cambia los colores de `background` y de `h1` por los que quieras.
+
+---
+
+## Si algo falla
+
+| Problema | Solución |
+|---|---|
+| No carga la página | Revisa que la terminal siga con `npm run start:dev` y sin errores en rojo. |
+| No aparece el cambio | Falta guardar el archivo (`Ctrl + S`). |
+| Sale `Cannot GET /users/bonito` | El controlador no se guardó o tiene el código incompleto. Pégalo de nuevo completo. |
+| Error `Nest can't resolve dependencies` | Revisa que el servicio tenga `@Injectable()` arriba de la clase. |
+| El puerto 3000 está ocupado | Cierra otra terminal que ya tenga el servidor corriendo. |
